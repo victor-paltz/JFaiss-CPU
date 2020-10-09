@@ -27,4 +27,7 @@ RUN make install
 
 # Create source files
 WORKDIR /opt/JFaiss/jni
-ENTRYPOINT [ "make" ]
+RUN make
+WORKDIR /opt/JFaiss
+RUN mvn clean test -Dtest=FaissTestRunner
+ENTRYPOINT [ "mvn", "package" ]

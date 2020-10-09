@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.ramanrajarathinam</groupId>
+    <groupId>com.github.victor-paltz</groupId>
     <artifactId>JFaiss-CPU</artifactId>
     <version>1.0.0</version>
 
@@ -22,7 +22,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.ramanrajarathinam</groupId>
+            <groupId>com.github.RamanRajarathinam</groupId>
             <artifactId>native-utils</artifactId>
             <version>1.0.0</version>
         </dependency>
@@ -30,9 +30,9 @@
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>
-        Faiss bindings for Java
+        Faiss v1.6.3 bindings for Java
     </description>
-    <url>https://github.com/RamanRajarathinam/JFaiss.git</url>
+    <url>https://github.com/victor-paltz/JFaiss-CPU.git</url>
 
     <licenses>
         <license>
@@ -50,6 +50,16 @@
             <organizationUrl>https://github.com/RamanRajarathinam</organizationUrl>
         </developer>
         <developer>
+            <name>Victor Paltz</name>
+            <organization>Github</organization>
+            <organizationUrl>https://github.com/victor-paltz</organizationUrl>
+        </developer>
+        <developer>
+            <name>Martin Bompaire</name>
+            <organization>Github</organization>
+            <organizationUrl>https://github.com/Mbompr</organizationUrl>
+        </developer>
+        <developer>
             <name>G.O.D</name>
             <organization>gameofdimension</organization>
             <organizationUrl>http://gameofdimension.com/</organizationUrl>
@@ -62,9 +72,9 @@
     </developers>
 
     <scm>
-        <connection>scm:git:https://github.com/RamanRajarathinam/JFaiss.git</connection>
-        <developerConnection>scm:git:ssh://github.com/RamanRajarathinam/JFaiss.git</developerConnection>
-        <url>https://github.com/RamanRajarathinam/JFaiss.git</url>
+        <connection>scm:git:https://github.com/victor-paltz/JFaiss-CPU.git</connection>
+        <developerConnection>scm:git:ssh://github.com/victor-paltz/JFaiss-CPU.git</developerConnection>
+        <url>https://github.com/victor-paltz/JFaiss-CPU.git</url>
         <tag>HEAD</tag>
     </scm>
 

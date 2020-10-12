@@ -20,8 +20,9 @@ ENV LD_PRELOAD=/usr/lib64/libgomp.so.1:/opt/intel/mkl/lib/intel64/libmkl_def.so:
 COPY . /opt/JFaiss
 WORKDIR /opt/JFaiss/faiss
 
+ENV CXXFLAGS="-mavx2 -mf16c"
 # Install faiss
-RUN CXXFLAGS="-mavx2 -mf16c" ./configure --prefix=/usr --libdir=/usr/lib64 --without-cuda
+RUN ./configure --prefix=/usr --without-cuda
 RUN make -j $(nproc)
 RUN make install
 

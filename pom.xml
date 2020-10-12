@@ -6,7 +6,7 @@
 
     <groupId>com.github.victor-paltz</groupId>
     <artifactId>JFaiss-CPU</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
 
     <properties>
         <maven.compiler.target>8</maven.compiler.target>
@@ -22,7 +22,7 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.RamanRajarathinam</groupId>
+            <groupId>com.github.ramanrajarathinam</groupId>
             <artifactId>native-utils</artifactId>
             <version>1.0.0</version>
         </dependency>

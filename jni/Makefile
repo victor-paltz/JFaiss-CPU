@@ -29,7 +29,8 @@ swigfaiss_avx2.cpp: swigfaiss.swig ../faiss/libfaiss.a
 
 # Extension is .so even on OSX.
 _%.so: %.o ../faiss/libfaiss.a
-	$(CXX) $(SHAREDFLAGS) $(LDFLAGS) -o $@ $^ $(LIBS)
+	$(CXX) $(SHAREDFLAGS) $(LDFLAGS) -Wl,--export-dynamic,-rpath='$$ORIGIN' -o $@ $^ $(LIBS)
+	chmod 755 _%.so
 
 build: _swigfaiss.so
 	mkdir -p ../cpu/src/main/resources

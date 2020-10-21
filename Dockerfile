@@ -13,9 +13,12 @@ RUN yum install -y numpy
 
 ENV LD_LIBRARY_PATH=/opt/intel/mkl/lib/intel64:$LD_LIBRARY_PATH
 ENV LIBRARY_PATH=/opt/intel/mkl/lib/intel64:$LIBRARY_PATH
-ENV LD_PRELOAD=/usr/lib64/libgomp.so.1:/opt/intel/mkl/lib/intel64/libmkl_def.so:\
-/opt/intel/mkl/lib/intel64/libmkl_avx2.so:/opt/intel/mkl/lib/intel64/libmkl_core.so:\
-/opt/intel/mkl/lib/intel64/libmkl_intel_lp64.so:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so
+ENV LD_PRELOAD=${LD_PRELOAD}:/usr/lib64/libgomp.so.1
+ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_def.so
+ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_avx2.so
+ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_core.so
+ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_intel_lp64.so
+ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so
 
 COPY . /opt/JFaiss
 WORKDIR /opt/JFaiss/faiss
@@ -28,4 +31,5 @@ RUN make install
 
 # Create source files
 WORKDIR /opt/JFaiss/jni
-ENTRYPOINT [ "make" ]
+CMD make 
+#&& tail -f /dev/null

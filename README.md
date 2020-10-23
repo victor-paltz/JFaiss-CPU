@@ -1,6 +1,7 @@
 # JFaiss-CPU **(Linux only)**
 
 Faiss (CPU) bindings for Java 
+Supports version 1.6.3 of Faiss, compiled with optimized flags for centOS.
 
 ## Adding JFaiss-CPU to you build
 
@@ -8,9 +9,9 @@ To add a dependency on JFaiss-CPU using Maven, use
 
 ```xml
 <dependency>
-  <groupId>com.github.ramanrajarathinam</groupId>
+  <groupId>com.github.victor-paltz</groupId>
   <artifactId>JFaiss-CPU</artifactId>
-  <version>1.0.0</version>
+  <version>1.3.4</version>
 </dependency>
 ```
 
@@ -37,7 +38,7 @@ mvn package
 
 Install faiss and generate required Java files
 ```sh
-git clone https://github.com/RamanRajarathinam/JFaiss-CPU.git
+git clone https://github.com/victor-paltz/JFaiss-CPU.git
 cd JFaiss-CPU
 git submodule update --init
 docker build -t jfaiss-source .

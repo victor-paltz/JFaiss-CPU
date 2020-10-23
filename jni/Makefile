@@ -29,20 +29,25 @@ swigfaiss_avx2.cpp: swigfaiss.swig ../faiss/libfaiss.a
 
 # Extension is .so even on OSX.
 _%.so: %.o ../faiss/libfaiss.a
-	$(CXX) $(SHAREDFLAGS) $(LDFLAGS) -Wl,--export-dynamic,-rpath='$$ORIGIN' -o $@ $^ $(LIBS)
-	chmod 755 _%.so
+	$(CXX) $(SHAREDFLAGS) $(LDFLAGS) -Wl,--export-dynamic,-rpath='$$ORIGIN' -o $@ $^ $(LIBS) -lmkl_def
+	chmod 755 $@
 
-build: _swigfaiss.so
-	mkdir -p ../cpu/src/main/resources
-	cp _swigfaiss.so ../cpu/src/main/resources/
+build: _swigfaiss.so 
+	$(eval _resources_path = ../cpu/src/main/resources)
+	mkdir -p ${_resources_path}
+	cp _swigfaiss.so ${_resources_path}
+	#cp _swigfaiss_avx2.so ${_resources_path}
+	cp /usr/lib64/libgomp.so.1 ${_resources_path}
+	cp /opt/intel/mkl/lib/intel64/libmkl_def.so ${_resources_path}
+	cp /opt/intel/mkl/lib/intel64/libmkl_avx2.so ${_resources_path}
+	cp /opt/intel/mkl/lib/intel64/libmkl_core.so ${_resources_path}
+	cp /opt/intel/mkl/lib/intel64/libmkl_intel_lp64.so ${_resources_path}
+	cp /opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so ${_resources_path}
 
-# install: build
-# 	$(PYTHON) setup.py install
-#
 
 clean:
 	rm -f swigfaiss*.cpp swigfaiss*.o  _swigfaiss*.so
 	rm -rf $(SWIGJAVASRC)
 
 
-.PHONY: all build install #clean install
+.PHONY: all build install clean

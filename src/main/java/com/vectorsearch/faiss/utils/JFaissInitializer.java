@@ -1,7 +1,5 @@
 package com.vectorsearch.faiss.utils;
 
-import com.nativeutils.NativeUtils;
-
 import java.io.IOException;
 
 public class JFaissInitializer {
@@ -11,7 +9,7 @@ public class JFaissInitializer {
     public static void initialize() throws IOException {
         if (!initialized) {
             initialized = true;
-            NativeUtils.loadLibraryFromJar(JFaissConstants.SWIGFAISS_SO_FILE);
+            NativeUtils2.loadLibraryFromJar(JFaissConstants.SWIGFAISS_SO_FILE, JFaissConstants.REQUIRED_SO_FILE);
         }
     }
 }

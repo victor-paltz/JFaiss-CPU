@@ -1,5 +1,11 @@
+.DS_Store
+*.so
+*.so.1
 ### Eclipse template
 
+target2
+lib_file
+jni2
 .metadata
 bin/
 tmp/

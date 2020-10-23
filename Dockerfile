@@ -35,5 +35,5 @@ RUN make install
 # Create source files
 WORKDIR /opt/JFaiss/jni
 RUN make 
-RUN cp -r /opt/JFaiss/cpu/src/main $GITHUB_WORKSPACE
+ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "${GITHUB_WORKSPACE}" ]
 #&& tail -f /dev/null

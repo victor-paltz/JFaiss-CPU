@@ -11,9 +11,6 @@ jobs:
       with:
         submodules: true
 
-    # - name: build Faiss in docker
-    #   uses: ./.github/actions
-
     - uses: whoan/docker-build-with-cache-action@v5
       with:
         username: victor-paltz
@@ -27,15 +24,13 @@ jobs:
     # - name: Run the docker image
     #   uses: ./.github/actions
 
-    - name: Debugging with tmate
-      uses: mxschmitt/action-tmate@v3
+    # - name: Debugging with tmate
+    #   uses: mxschmitt/action-tmate@v3
 
-    - run: docker image ls
+    # - run: docker image ls
 
     - run: docker run -v "/home/runner/work/JFaiss-CPU/JFaiss-CPU":"/github/workspace" docker.pkg.github.com/victor-paltz/jfaiss-cpu/jfaiss-cpu
 
-    
-    
     - uses: actions/upload-artifact@v2
       with:
         name: faiss_JNI_and_SO

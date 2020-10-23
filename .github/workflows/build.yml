@@ -30,7 +30,7 @@ jobs:
     - name: Debugging with tmate
       uses: mxschmitt/action-tmate@v3
 
-    - run: docker run -v "/home/runner/work/JFaiss-CPU/JFaiss-CPU":"/github/workspace"
+    - run: docker run -v "/home/runner/work/JFaiss-CPU/JFaiss-CPU":"/github/workspace" jfaiss-cpu
 
     
     

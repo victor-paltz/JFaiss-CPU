@@ -11,7 +11,7 @@ jobs:
       with:
         submodules: true
     - name: build Faiss
-      uses: ./.github/action/action.yml
+      uses: ./.github/actions
 
   build:
     runs-on: ubuntu-latest

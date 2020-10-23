@@ -23,7 +23,6 @@ ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so
 COPY . /opt/JFaiss
 WORKDIR /opt/JFaiss/faiss
 
-VOLUME [ "/data" ]
 RUN touch /data/test
 
 ENV CXXFLAGS="-mavx2 -mf16c"

@@ -7,9 +7,11 @@ jobs:
   build_faiss:
     runs-on: ubuntu-latest
     steps: 
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
+      with:
+        submodules: true
     - name: build Faiss
-      uses: ./.github/actions/action
+      uses: ./.github/action/action.yml
 
   build:
     runs-on: ubuntu-latest

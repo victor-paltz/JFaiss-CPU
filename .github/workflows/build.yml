@@ -24,14 +24,15 @@ jobs:
         image_name: jfaiss-cpu
         dockerfile: Dockerfile
 
-    - name: Run the docker image
-      uses: ./.github/actions
+    # - name: Run the docker image
+    #   uses: ./.github/actions
 
+    - name: Debugging with tmate
+      uses: mxschmitt/action-tmate@v3
 
-    #- run: docker run -v "/home/runner/work/JFaiss-CPU/JFaiss-CPU":"/github/workspace"
+    - run: docker run -v "/home/runner/work/JFaiss-CPU/JFaiss-CPU":"/github/workspace"
 
-    # - name: Debugging with tmate
-    #   uses: mxschmitt/action-tmate@v3
+    
     
     - uses: actions/upload-artifact@v2
       with:

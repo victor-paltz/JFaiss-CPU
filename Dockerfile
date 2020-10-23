@@ -32,5 +32,5 @@ RUN make install
 # Create source files
 WORKDIR /opt/JFaiss/jni
 RUN make 
-ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "/home/runner/work/JFaiss-CPU/JFaiss-CPU/build" ]
+ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "/github/workspace/build" ]
 #&& tail -f /dev/null

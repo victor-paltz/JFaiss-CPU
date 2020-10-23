@@ -23,8 +23,6 @@ ENV LD_PRELOAD=${LD_PRELOAD}:/opt/intel/mkl/lib/intel64/libmkl_gnu_thread.so
 COPY . /opt/JFaiss
 WORKDIR /opt/JFaiss/faiss
 
-RUN touch /data/test
-
 ENV CXXFLAGS="-mavx2 -mf16c"
 # Install faiss
 RUN ./configure --prefix=/usr --without-cuda
@@ -34,5 +32,5 @@ RUN make install
 # Create source files
 WORKDIR /opt/JFaiss/jni
 RUN make 
-ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "/home/runner/JFaiss-CPU/JFaiss-CPU/build" ]
+ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "/home/runner/work/JFaiss-CPU/JFaiss-CPU/build" ]
 #&& tail -f /dev/null

@@ -1,0 +1,8 @@
+# action_docker.yml
+
+name: 'Build Faiss'
+description: 'Generate optimised build for Faiss'
+
+runs:
+  using: 'docker'
+  image: jfaiss-cpu

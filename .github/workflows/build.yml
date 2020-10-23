@@ -11,19 +11,24 @@ jobs:
       with:
         submodules: true
 
-    - name: build Faiss in docker
+    # - name: build Faiss in docker
+    #   uses: ./.github/actions
+
+    - uses: whoan/docker-build-with-cache-action@v5
+      with:
+        username: victor-paltz
+        password: "${{ secrets.GITHUB_TOKEN }}"
+        registry: docker.pkg.github.com
+        #or
+        #registry: ghcr.io
+        image_name: jfaiss-cpu
+        dockerfile: Dockerfile
+
+    - name: Run the docker image
       uses: ./.github/actions
-    # - uses: whoan/docker-build-with-cache-action@v5
-    #   with:
-    #     username: victor-paltz
-    #     password: "${{ secrets.GITHUB_TOKEN }}"
-    #     registry: docker.pkg.github.com
-    #     #or
-    #     #registry: ghcr.io
-    #     image_name: jfaiss-cpu
-    #     dockerfile: Dockerfile
 
 
+    #- run: docker run -v "/home/runner/work/JFaiss-CPU/JFaiss-CPU":"/github/workspace"
 
     # - name: Debugging with tmate
     #   uses: mxschmitt/action-tmate@v3

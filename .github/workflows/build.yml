@@ -36,10 +36,11 @@ jobs:
           name: faiss_JNI_and_SO
           path: build_copy
       - name: Move
-        run: rm -rf src/main/java/com/vectorsearch/faiss/swig
-        run: cp -r build_copy/src/main/java/com/vectorsearch/faiss/swig src/main/java/com/vectorsearch/faiss/swig
-        run: rm -rf src/main/resources
-        run: cp -r build_copy/src/main/resources src/main/resources
+        run: |
+          rm -rf src/main/java/com/vectorsearch/faiss/swig
+          cp -r build_copy/src/main/java/com/vectorsearch/faiss/swig src/main/java/com/vectorsearch/faiss/swig
+          rm -rf src/main/resources
+          cp -r build_copy/src/main/resources src/main/resources
 
       - name: Publish package
         run: mvn -B deploy

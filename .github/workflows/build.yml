@@ -17,8 +17,8 @@ jobs:
         registry: docker.pkg.github.com
         #or
         #registry: ghcr.io
-        image_name: JFaiss-CPU
-        dockerfile: ../../Dockerfile
+        # image_name: JFaiss-CPU
+        dockerfile: Dockerfile
 
     # - name: Debugging with tmate
     #   uses: mxschmitt/action-tmate@v3

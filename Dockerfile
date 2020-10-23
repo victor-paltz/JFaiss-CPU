@@ -31,5 +31,5 @@ RUN make install
 
 # Create source files
 WORKDIR /opt/JFaiss/jni
-CMD make 
+RUN make 
 #&& tail -f /dev/null

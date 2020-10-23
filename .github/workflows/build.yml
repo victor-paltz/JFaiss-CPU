@@ -10,8 +10,15 @@ jobs:
     - uses: actions/checkout@master
       with:
         submodules: true
-    - name: build Faiss in docker
-      uses: ./.github/actions
+    - uses: whoan/docker-build-with-cache-action@v5
+      with:
+        username: victor-paltz
+        password: "${{ secrets.GITHUB_TOKEN }}"
+        registry: docker.pkg.github.com
+        #or
+        #registry: ghcr.io
+        image_name: JFaiss-CPU
+        dockerfile: ../../Dockerfile
 
     # - name: Debugging with tmate
     #   uses: mxschmitt/action-tmate@v3
@@ -38,9 +45,9 @@ jobs:
       - name: Move
         run: |
           rm -rf src/main/java/com/vectorsearch/faiss/swig
-          cp -r build_copy/src/main/java/com/vectorsearch/faiss/swig src/main/java/com/vectorsearch/faiss/swig
+          cp -r build_copy/java/com/vectorsearch/faiss/swig src/main/java/com/vectorsearch/faiss/swig
           rm -rf src/main/resources
-          cp -r build_copy/src/main/resources src/main/resources
+          cp -r build_copy/resources src/main/resources
 
       - name: Publish package
         run: mvn -B deploy

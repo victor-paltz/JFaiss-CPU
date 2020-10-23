@@ -10,8 +10,17 @@ jobs:
     - uses: actions/checkout@master
       with:
         submodules: true
-    - name: build Faiss
+    - name: build Faiss in docker
       uses: ./.github/actions
+
+    - name: Debugging with tmate
+      uses: mxschmitt/action-tmate@v3
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: faiss_JNI_and_SO
+        path: cpu/src/main/resources
+    
 
   build:
     needs: build_faiss

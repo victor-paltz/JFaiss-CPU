@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.nio.file.*;
 import java.util.logging.Logger;
 
+import com.globalload.LibraryLoaderJNI;
+
 /**
  * A simple library class which helps with loading dynamic libraries stored in the JAR archive.
  * These libraries usually contain implementation of some methods in native code (using JNI - Java
@@ -60,15 +62,20 @@ public class NativeUtils2 {
             temporaryDir.deleteOnExit();
         }
 
+        /* Copy all the .so lib required */
         copyFileToDir(path, temporaryDir);
-
         for (String libPath : requiredLibPaths) {
             copyFileToDir(libPath, temporaryDir);
         }
 
-        final File tempLibToLoad = new File(temporaryDir, baseName(path));
+        /* Load the required libraries globally (RTLD_GLOBAL | RTLD_LAZY) in the given order */
+        for (String libPath : requiredLibPaths) {
+            File tempLibToLoadBefore = new File(temporaryDir, baseName(libPath));
+            LibraryLoaderJNI.loadLibrary(tempLibToLoadBefore);
+        }
 
-        /* load file */
+        /* Load the native library locally */
+        final File tempLibToLoad = new File(temporaryDir, baseName(path));
         try {
             System.load(tempLibToLoad.getAbsolutePath());
         } finally {

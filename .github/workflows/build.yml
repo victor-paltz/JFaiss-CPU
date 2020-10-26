@@ -57,6 +57,9 @@ jobs:
           rm -rf src/main/resources
           cp -r build_copy/resources src/main/resources
 
+      - name: Debugging with tmate
+        uses: mxschmitt/action-tmate@v3
+
       - name: Publish package
         run: mvn -B deploy
         env:

@@ -24,7 +24,7 @@
         <dependency>
             <groupId>com.github.victor-paltz</groupId>
             <artifactId>global-load-library</artifactId>
-            <version>1.0.0</version>
+            <version>1.1.0</version>
         </dependency>
         <!-- <dependency>
             <groupId>com.github.ramanrajarathinam</groupId>
@@ -92,15 +92,15 @@
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
-<!--        <stagedrepository>-->
+<!--        <repository>-->
 <!--            <id>ossrh</id>-->
 <!--            <url>https://oss.sonatype.org/content/repositories/staging/</url>-->
-<!--        </stagedrepository>-->
-<!--        <repository>-->
-<!--            <id>github</id>-->
-<!--            <name>GitHub Packages</name>-->
-<!--            <url>https://maven.pkg.github.com/victor-paltz/JFaiss-CPU</url>-->
 <!--        </repository>-->
+        <!--        <repository>-->
+        <!--            <id>github</id>-->
+        <!--            <name>GitHub Packages</name>-->
+        <!--            <url>https://maven.pkg.github.com/victor-paltz/JFaiss-CPU</url>-->
+        <!--        </repository>-->
 
     </distributionManagement>
 
@@ -167,4 +167,19 @@
             </plugin>
         </plugins>
     </build>
+
+    <!-- <profiles>
+        <profile>
+            <id>staged-releases</id>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>staged-releases</id>
+                    <url>https://oss.sonatype.org/content/repositories/staging/</url>
+                    <releases><enabled>true</enabled></releases>
+                    <snapshots><enabled>true</enabled></snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles> -->
+
 </project>

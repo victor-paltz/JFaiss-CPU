@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.victor-paltz</groupId>
-    <artifactId>jfaiss-cpu</artifactId>
-    <version>1.5.0</version>
+    <artifactId>JFaiss-CPU</artifactId>
+    <version>1.6.0</version>
 
     <properties>
         <maven.compiler.target>8</maven.compiler.target>
@@ -26,11 +26,6 @@
             <artifactId>global-load-library</artifactId>
             <version>1.1.0</version>
         </dependency>
-        <!-- <dependency>
-            <groupId>com.github.ramanrajarathinam</groupId>
-            <artifactId>native-utils</artifactId>
-            <version>1.0.0</version>
-        </dependency> -->
     </dependencies>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -84,24 +79,14 @@
     </scm>
 
     <distributionManagement>
-        <!-- <snapshotRepository>
+        <snapshotRepository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
             <id>ossrh</id>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository> -->
-<!--        <repository>-->
-<!--            <id>ossrh</id>-->
-<!--            <url>https://oss.sonatype.org/content/repositories/staging/</url>-->
-        <!-- </repository> -->
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/victor-paltz/JFaiss-CPU</url>
         </repository>
-
     </distributionManagement>
 
     <build>
@@ -165,21 +150,117 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.8</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.5.3</version>
+                <configuration>
+                    <localCheckout>true</localCheckout>
+                    <pushChanges>false</pushChanges>
+                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-api</artifactId>
+                        <version>1.10.0</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.apache.maven.scm</groupId>
+                        <artifactId>maven-scm-provider-gitexe</artifactId>
+                        <version>1.10.0</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
         </plugins>
     </build>
 
-    <!-- <profiles>
+    <profiles>
         <profile>
-            <id>staged-releases</id>
-            <pluginRepositories>
-                <pluginRepository>
-                    <id>staged-releases</id>
-                    <url>https://oss.sonatype.org/content/repositories/staging/</url>
-                    <releases><enabled>true</enabled></releases>
-                    <snapshots><enabled>true</enabled></snapshots>
-                </pluginRepository>
-            </pluginRepositories>
+            <id>deploy</id>
+            <build>
+                <plugins>
+                <!-- Source plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-source-plugin</artifactId>
+                    <version>3.2.1</version>
+                    <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                        <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                    </executions>
+                </plugin>
+
+                <!-- Javadoc plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.2.0</version>
+                    <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                        <goal>jar</goal>
+                        </goals>
+                    </execution>
+                    </executions>
+                </plugin>
+
+                <!-- GPG plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.6</version>
+                    <executions>
+                        <execution>
+                            <id>sign-artifacts</id>
+                            <phase>verify</phase>
+                            <goals>
+                                <goal>sign</goal>
+                            </goals>
+                            <configuration>
+                                <!-- Prevent `gpg` from using pinentry programs -->
+                                <gpgArguments>
+                                    <arg>--pinentry-mode</arg>
+                                    <arg>loopback</arg>
+                                </gpgArguments>
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+                </plugins>
+            </build>
         </profile>
-    </profiles> -->
+    </profiles>
 
 </project>

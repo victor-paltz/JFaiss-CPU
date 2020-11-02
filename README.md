@@ -11,7 +11,7 @@ To add a dependency on JFaiss-CPU using Maven, use
 <dependency>
   <groupId>com.github.victor-paltz</groupId>
   <artifactId>JFaiss-CPU</artifactId>
-  <version>1.3.4</version>
+  <version>2.0.0</version>
 </dependency>
 ```
 
@@ -53,5 +53,7 @@ This will generate required `.java` files from `swigfaiss.swig`
 ## Reference
 
 - <https://github.com/gameofdimension/jni-faiss>
+- <https://github.com/victor-paltz/global-load-library>
 - <https://github.com/adamheinrich/native-utils>
 - <https://github.com/thenetcircle/faiss4j>
+

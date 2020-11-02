@@ -71,7 +71,12 @@ public class NativeUtils2 {
         /* Load the required libraries globally (RTLD_GLOBAL | RTLD_LAZY) in the given order */
         for (String libPath : requiredLibPaths) {
             File tempLibToLoadBefore = new File(temporaryDir, baseName(libPath));
-            LibraryLoaderJNI.loadLibrary(tempLibToLoadBefore.getAbsolutePath());
+            try{
+                LibraryLoaderJNI.loadLibrary(tempLibToLoadBefore.getAbsolutePath());
+            } catch (UnsatisfiedLinkError e){
+                LOGGER.warning(e.getMessage());
+            }
+
         }
 
         /* Load the native library locally */

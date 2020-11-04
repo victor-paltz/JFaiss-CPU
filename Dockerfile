@@ -1,9 +1,14 @@
 FROM centos:7
 
+# Try using most up-to-date gcc compiler tools to get faster build
+RUN yum install centos-release-scl
+RUN yum install devtoolset-8
+RUN scl enable devtoolset-8 bash
+
 RUN yum install -y lapack lapack-devel
 
 # Install necessary build tools
-RUN yum install -y gcc-c++ make swig3
+RUN yum install -y make swig3
 RUN yum install -y blas-devel
 RUN yum-config-manager --add-repo https://yum.repos.intel.com/mkl/setup/intel-mkl.repo
 RUN rpm --import https://yum.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2019.PUB

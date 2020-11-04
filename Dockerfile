@@ -1,8 +1,7 @@
 FROM centos:7
 
 # Try using most up-to-date gcc compiler tools to get faster build
-RUN yum install centos-release-scl
-RUN yum install devtoolset-8
+RUN yum install -y centos-release-scl devtoolset-8
 RUN scl enable devtoolset-8 bash
 
 RUN yum install -y lapack lapack-devel

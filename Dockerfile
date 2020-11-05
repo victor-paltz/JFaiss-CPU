@@ -4,6 +4,11 @@ FROM centos:7
 RUN yum install -y centos-release-scl 
 RUN yum install -y devtoolset-8-gcc devtoolset-8-gcc-c++
 RUN scl enable devtoolset-8 bash
+#RUN source /opt/rh/devtoolset-8/enable
+#RUN source scl_source enable devtoolset-8
+#RUN /usr/bin/scl enable devtoolset-8
+#RUN gcc -v
+#RUN scl enable devtoolset-8 $"g++ -v"
 
 RUN yum install -y lapack lapack-devel
 
@@ -30,12 +35,12 @@ WORKDIR /opt/JFaiss/faiss
 
 ENV CXXFLAGS="-mavx2 -mf16c"
 # Install faiss
-RUN ./configure --prefix=/usr --without-cuda
-RUN make -j $(nproc)
-RUN make install
+RUN scl enable devtoolset-8 ./configure --prefix=/usr --without-cuda
+RUN scl enable devtoolset-8 make -j $(nproc)
+RUN scl enable devtoolset-8 make install
 
 # Create source files
 WORKDIR /opt/JFaiss/jni
-RUN make 
+RUN scl enable devtoolset-8 make 
 ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "/github/workspace/build" ]
 #&& tail -f /dev/null

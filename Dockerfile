@@ -3,12 +3,15 @@ FROM centos:7
 # Try using most up-to-date gcc compiler tools to get faster build
 RUN yum install -y centos-release-scl 
 RUN yum install -y devtoolset-8-gcc devtoolset-8-gcc-c++
-RUN scl enable devtoolset-8 bash
+
+SHELL [ "/usr/bin/scl", "enable", "devtoolset-8"]
+
+#RUN scl enable devtoolset-8 bash
 #RUN source /opt/rh/devtoolset-8/enable
 #RUN source scl_source enable devtoolset-8
 #RUN /usr/bin/scl enable devtoolset-8
 #RUN gcc -v
-#RUN scl enable devtoolset-8 $"g++ -v"
+RUN gcc --version
 
 RUN yum install -y lapack lapack-devel
 
@@ -35,12 +38,12 @@ WORKDIR /opt/JFaiss/faiss
 
 ENV CXXFLAGS="-mavx2 -mf16c"
 # Install faiss
-RUN scl enable devtoolset-8 ./configure --prefix=/usr --without-cuda
-RUN scl enable devtoolset-8 make -j $(nproc)
-RUN scl enable devtoolset-8 make install
+RUN ./configure --prefix=/usr --without-cuda
+RUN make -j $(nproc)
+RUN make install
 
 # Create source files
 WORKDIR /opt/JFaiss/jni
-RUN scl enable devtoolset-8 make 
+RUN make 
 ENTRYPOINT [ "cp", "-r", "/opt/JFaiss/cpu/src/main", "/github/workspace/build" ]
 #&& tail -f /dev/null
